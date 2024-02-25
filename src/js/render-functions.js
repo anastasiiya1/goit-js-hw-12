@@ -7,19 +7,18 @@ const loader = document.querySelector('.loader');
 
 const instance = new SimpleLightbox('.card-item a', {
   captionsData: 'alt',
-  captionDelay: 250,
+  captionDelay: 250, 
 });
 
-export function renderCards({ hits }) {
-  if (!hits.length) {
-    iziToast.error({
+export function renderCards(data) {
+  if (!data.hits || data.hits.length === 0) {
+    return iziToast.error({
       title: 'Error',
       message: 'Sorry, there are no images matching your search query. Please try again!',
-      position: 'topRight',
+      position: 'center',
     });
-    return;
   }
-  const markup = getMarkup(hits);
+  const markup = getMarkup(data.hits);
   galleryList.insertAdjacentHTML('beforeend', markup);
   instance.refresh();
 }
@@ -65,6 +64,3 @@ function getMarkup(data) {
 export function toggleLoader() {
   loader.classList.toggle('is-hidden');
 }
-
-
-console.log();
