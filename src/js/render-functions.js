@@ -11,7 +11,7 @@ const instance = new SimpleLightbox('.card-item a', {
 });
 
 export function renderCards(data) {
-  if (!data.hits || data.hits.length === 0) {
+  if (!data.hits) {
     return iziToast.error({
       title: 'Error',
       message: 'Sorry, there are no images matching your search query. Please try again!',
