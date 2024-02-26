@@ -28,8 +28,8 @@ async function fetchData(searchQuery, pageNum) {
     toggleLoader();
     const data = await fetchCards(searchQuery, pageNum);
 
-    if (!data.hits || data.hits.length === 0) {
-      throw new Error('No more images found for the current search.');
+    if (!data || !data.hits || data.hits.length === 0) {
+      console.error('Error: No more images found for the current search.');
     }
     totalHits = data.totalHits;
 
@@ -70,7 +70,6 @@ function onSearchFormSubmit(event) {
   }
 
   galleryList.innerHTML = '';
-  toggleLoader();
 
   page = 1;
   currentSearchQuery = userSearchQuery; 
